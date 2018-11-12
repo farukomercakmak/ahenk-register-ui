@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Encoding=UTF-8
+Name=Ahenk
+GenericName=Ahenk İstemci Uygulaması
+Comment=Ahenk İstemci Uygulaması
+Icon= /usr/share/ahenk/icons/ahenk.png
+Categories=Development;Application
+Terminal=false

@@ -1,13 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# Author: Ömer Çakmak <farukomercakmak@gmail.com>
+# Author: Ömer Çakmak <farukomercakmak@gmail.com
 
-import easygui
 import os.path
 import os
 import subprocess
 import configparser
-
+import easygui
 
 def register():
     register_image = "/usr/share/ahenk/icons/ahenk_register.png"
@@ -24,7 +23,7 @@ def register():
         print("Etki alanına alma işlemi iptal edildi")
 
 def unregister():
-    register_image = "/usr/share/ahenk/icons/ahenk_register.png"
+    register_image = "/usr/share/ahenk/icons/ahenk_unregister.png"
     msg = "Ahenk etki alanında, çıkmak istiyor musunuz?"
     choices = ["Evet", "Daha Sonra"]
     reply = easygui.buttonbox(msg, image=register_image, choices=choices)
@@ -41,10 +40,10 @@ def ahenk_control():
     PATH = '/etc/ahenk/ahenk.conf'
     rahenk_control_image = "/usr/share/ahenk/icons/ahenk_register.png"
     if os.path.isfile(PATH) and os.access(PATH, os.R_OK):
-        print "ahenk.conf var"
+
         is_registered()
     else:
-        print "ahenk.conf yok"
+
         cevap = 'ahenk.conf bulunamadı, ahenk paketinin yüklü olduğundan emin olun!'
         choice = easygui.buttonbox(msg=cevap, image=rahenk_control_image, title='Ahenk Etki alanı Kontrolü',choices=['Tamam'])
 
