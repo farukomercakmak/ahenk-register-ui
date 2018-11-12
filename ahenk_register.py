@@ -2,56 +2,64 @@
 # -*- coding: utf-8 -*-
 # Author: Ömer Çakmak <farukomercakmak@gmail.com>
 
-import sys
 import easygui
 import os.path
 import os
-#from base.system.system import System
 import subprocess
-
+import configparser
 
 
 def register():
-    register_image = "/usr/share/ahenk/icons/ahenk_unregister.png"
-    PATH='/etc/ahenk/ahenk.conf'
-    if os.path.isfile(PATH) and os.access(PATH, os.R_OK):
-        print "ahenk.conf var"
-
-        msg = "Etki Alanına Almak İstiyor musunuz?"
-        title = "Ahenk Etki Alanı Kontrolü"
-        image = register_image
-        #choice = easygui.buttonbox
-        if easygui.buttonbox(msg, title):  # show a Continue/Cancel dialog
-            pass  # user chose Continue
-        else:  # user chose Cancel
-            sys.exit(0)
-
+    register_image = "/usr/share/ahenk/icons/ahenk_register.png"
+    msg = "Ahenk etki alanında değil, etki alanına almak istiyor musunuz?"
+    choices = ["Evet", "Daha Sonra"]
+    reply = easygui.buttonbox(msg, image=register_image, choices=choices)
+    if reply == "Evet":
         command = "sudo python3 /usr/share/ahenk/ahenkd.py start"
-        process = subprocess.Popen(command, stdin=None, env=None, cwd=None, stderr=subprocess.PIPE,
-                                   stdout=subprocess.PIPE, shell=True)
+        process = subprocess.Popen(command, stdin=None, env=None, cwd=None, stderr=subprocess.PIPE, stdout=subprocess.PIPE, shell=True)
         result_code = process.wait()
         p_out = process.stdout.read().decode("unicode_escape")
         p_err = process.stderr.read().decode("unicode_escape")
-
     else:
-        cevap = 'ahenk.conf bulunamadı, ahenk paketinin yüklü olduğundan emin olun!'
-        choice = easygui.buttonbox(msg=cevap, image=image, title='Ahenk Etki alanı Kontrolü', choices=['Etki Alanına Al'])
-
+        print("Etki alanına alma işlemi iptal edildi")
 
 def unregister():
     register_image = "/usr/share/ahenk/icons/ahenk_register.png"
-
-
     msg = "Ahenk etki alanında, çıkmak istiyor musunuz?"
     choices = ["Evet", "Daha Sonra"]
     reply = easygui.buttonbox(msg, image=register_image, choices=choices)
-    if reply == "Yes":
-        print("Evet")
+    if reply == "Evet":
+        command = "sudo python3 /usr/share/ahenk/ahenkd.py unregister"
+        process = subprocess.Popen(command, stdin=None, env=None, cwd=None, stderr=subprocess.PIPE, stdout=subprocess.PIPE, shell=True)
+        result_code = process.wait()
+        p_out = process.stdout.read().decode("unicode_escape")
+        p_err = process.stderr.read().decode("unicode_escape")
     else:
-        print("No")
+        print("Etki alanından çıkma işlemi  iptal edildi")
 
+def ahenk_control():
+    PATH = '/etc/ahenk/ahenk.conf'
+    rahenk_control_image = "/usr/share/ahenk/icons/ahenk_register.png"
+    if os.path.isfile(PATH) and os.access(PATH, os.R_OK):
+        print "ahenk.conf var"
+        is_registered()
+    else:
+        print "ahenk.conf yok"
+        cevap = 'ahenk.conf bulunamadı, ahenk paketinin yüklü olduğundan emin olun!'
+        choice = easygui.buttonbox(msg=cevap, image=rahenk_control_image, title='Ahenk Etki alanı Kontrolü',choices=['Tamam'])
 
-   if __name__ == '__main__':
+def uid():
+    config = configparser.ConfigParser()
+    config._interpolation = configparser.ExtendedInterpolation()
+    config.read("/etc/ahenk/ahenk.conf")
+    return config.get('CONNECTION', 'uid')
 
-       unregister()
-       #register()
+def is_registered():
+    if str(uid()):
+        unregister()
+    else:
+        register()
+
+if __name__ == '__main__':
+
+    ahenk_control()
