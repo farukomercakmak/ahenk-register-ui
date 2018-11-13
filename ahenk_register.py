@@ -14,7 +14,7 @@ def register():
     choices = ["Evet", "Daha Sonra"]
     reply = easygui.buttonbox(msg, image=register_image, choices=choices)
     if reply == "Evet":
-        command = "sudo /usr/bin/python3 /usr/share/ahenk/ahenkd.py start"
+        command = "/usr/bin/python3 /usr/share/ahenk/ahenkd.py start"
         process = subprocess.Popen(command, stdin=None, env=None, cwd=None, stderr=subprocess.PIPE, stdout=subprocess.PIPE, shell=True)
         result_code = process.wait()
         p_out = process.stdout.read().decode("unicode_escape")
@@ -28,7 +28,7 @@ def unregister():
     choices = ["Evet", "Daha Sonra"]
     reply = easygui.buttonbox(msg, image=register_image, choices=choices)
     if reply == "Evet":
-        command = "sudo /usr/bin/python3 /usr/share/ahenk/ahenkd.py unregister"
+        command = "/usr/bin/python3 /usr/share/ahenk/ahenkd.py unregister"
         process = subprocess.Popen(command, stdin=None, env=None, cwd=None, stderr=subprocess.PIPE, stdout=subprocess.PIPE, shell=True)
         result_code = process.wait()
         p_out = process.stdout.read().decode("unicode_escape")
