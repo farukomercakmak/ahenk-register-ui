@@ -15,16 +15,10 @@ def register():
         choices = ["Evet", "Daha Sonra"]
         reply = easygui.buttonbox(msg, image=register_image, title='Ahenk Etki Alanı Kontrolü', choices=choices)
         if reply == "Evet":
-
-
             command = "/usr/bin/python3 /usr/share/ahenk/ahenkd.py start"
-
-            #command = 'su - {0} -c "{1}"'.format('foc-065035021', command)
-            #exec("/home/foc-065035021/dev/ahenk-register-ui/a.py")
             process = subprocess.Popen(command, shell=True)
             result_code = process.wait()
             print(result_code)
-
         else:
             print("Etki alanına alma işlemi iptal edildi")
 
