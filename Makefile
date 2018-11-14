@@ -10,9 +10,12 @@ install:
 	mkdir -p $(DESTDIR)/usr/share/applications
 	@cp -rf ahenk.desktop $(DESTDIR)/usr/share/applications/
 
+	mkdir -p $(DESTDIR)/usr/bin
+	@cp -rf ahenk-register $(DESTDIR)/usr/bin/
 uninstall:
 	@rm -rf /usr/share/ahenk/ahenk_register.py
 	@rm -rf /usr/share/applications/ahenk.desktop
 	@rm -rf /usr/bin/ahenk/icons
+	@rm -rf /usr/bin/ahenk-register
 
 .PHONY: install uninstall
