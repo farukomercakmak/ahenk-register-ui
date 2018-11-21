@@ -1,6 +1,6 @@
 all: install
 
-install: 
+install:
 	mkdir -p $(DESTDIR)/usr/share/ahenk
 	@cp -rf ahenk_register.py $(DESTDIR)/usr/share/ahenk/
 
@@ -15,12 +15,10 @@ install:
 
 	mkdir -p $(DESTDIR)/usr/sbin
         @cp -rf ahenk-register-pkexec $(DESTDIR)/usr/sbin/
-
 uninstall:
 	@rm -rf /usr/share/ahenk/ahenk_register.py
 	@rm -rf /usr/share/applications/ahenk.desktop
 	@rm -rf /usr/bin/ahenk/icons
 	@rm -rf /usr/bin/ahenk-register
 	@rm -rf /usr/sbin/ahenk-register-pkexec
-
 .PHONY: install uninstall
