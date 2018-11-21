@@ -5,6 +5,6 @@ Name=Ahenk
 GenericName=Ahenk İstemci Uygulaması
 Comment=Ahenk İstemci Uygulaması
 Exec= /usr/sbin/ahenk-register-pkexec
-Icon= ahenk-register.png
+Icon= /usr/share/ahenk-register/icons/ahenk-register.png
 Categories=Development;Application
 Terminal=false
