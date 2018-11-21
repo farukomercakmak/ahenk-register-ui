@@ -14,7 +14,7 @@ install:
 	@cp -rf ahenk-register $(DESTDIR)/usr/bin/
 
 	mkdir -p $(DESTDIR)/usr/sbin
-        @cp -rf ahenk-register-pkexec $(DESTDIR)/usr/sbin/
+	@cp -rf ahenk-register-pkexec $(DESTDIR)/usr/sbin/
 uninstall:
 	@rm -rf /usr/share/ahenk/ahenk_register.py
 	@rm -rf /usr/share/applications/ahenk.desktop
